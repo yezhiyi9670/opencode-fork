@@ -314,6 +314,7 @@ const layer = Layer.effect(
             description: tool.description,
             parameters: tool.parameters,
             jsonSchema: tool.jsonSchema,
+            executeFn: tool.execute,
           }
           yield* plugin.trigger("tool.definition", { toolID: tool.id }, output)
           const jsonSchema =
@@ -331,7 +332,7 @@ const layer = Layer.effect(
               .join("\n"),
             parameters: output.parameters,
             jsonSchema,
-            execute: tool.execute,
+            execute: output.executeFn,
             formatValidationError: tool.formatValidationError,
           }
         }),

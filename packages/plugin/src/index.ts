@@ -14,6 +14,7 @@ import type { Provider as ProviderV2, Model as ModelV2, Auth } from "@opencode-a
 
 import type { BunShell } from "./shell.js"
 import { type ToolDefinition } from "./tool.js"
+import type { JSONSchema7 } from "@ai-sdk/provider"
 
 export * from "./tool.js"
 
@@ -331,5 +332,10 @@ export interface Hooks {
   /**
    * Modify tool definitions (description and parameters) sent to LLM
    */
-  "tool.definition"?: (input: { toolID: string }, output: { description: string; parameters: any }) => Promise<void>
+  "tool.definition"?: (input: { toolID: string }, output: {
+    description: string
+    parameters: any
+    jsonSchema: JSONSchema7
+    executeFn: Function
+  }) => Promise<void>
 }
