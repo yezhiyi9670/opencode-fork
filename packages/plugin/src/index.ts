@@ -13,8 +13,9 @@ import type {
 import type { Provider as ProviderV2, Model as ModelV2, Auth } from "@opencode-ai/sdk/v2"
 
 import type { BunShell } from "./shell.js"
-import { type ToolDefinition } from "./tool.js"
+import { type ToolContext, type ToolDefinition, type ToolResult } from "./tool.js"
 import type { JSONSchema7 } from "@ai-sdk/provider"
+import type { Effect } from "effect"
 
 export * from "./tool.js"
 
@@ -336,6 +337,6 @@ export interface Hooks {
     description: string
     parameters: any
     jsonSchema: JSONSchema7
-    executeFn: Function
+    executeFn: (params: { [key: string]: any }, ctx: ToolContext) => Effect.Effect<ToolResult> 
   }) => Promise<void>
 }
